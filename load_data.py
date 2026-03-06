@@ -2,6 +2,7 @@ import os
 import time
 from dotenv import load_dotenv
 import libsql
+from datetime import datetime
 load_dotenv()
 
 
@@ -10,8 +11,8 @@ from get_yfinance_data import get_current_price
 
 def positive_or_negative_percent(percent):
     if percent > 0:
-        return f"+{percent}%"
-    return f"{percent}%"
+        return f"📈 +{percent}%"
+    return f"📉 {percent}%"
 
 def positive_or_negative_value(value):
     if value > 0:
@@ -78,12 +79,8 @@ def load_data_for_post():
     # }
     # Nowa cena / srednia cena - 1 * 100 = o ile procent wzroslo
 
-
-
-
-
-
-    data_to_post = f"Stan portfela:\n"
+    date = datetime.now().strftime("%d.%m.%Y")
+    data_to_post = f"📊 Stan portfela [{date}]:\n"
 
     old_value = 0
 
@@ -100,7 +97,7 @@ def load_data_for_post():
     for ticker in info.keys():
         total_return_sum += info[ticker]["total_return"]
 
-    data_to_post += f"Wartość: {round(wallet_value, 2)} | {positive_or_negative_value(round(total_return_sum, 2))}zł | {positive_or_negative_percent(total_return_ptc_sum)}"
+    data_to_post += f"💼 Wartość: {round(wallet_value, 2)}zł | {positive_or_negative_value(round(total_return_sum, 2))}zł | {positive_or_negative_percent(total_return_ptc_sum)}"
 
 
 
