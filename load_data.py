@@ -11,8 +11,17 @@ from get_yfinance_data import get_current_price
 
 def positive_or_negative_percent(percent):
     if percent > 0:
-        return f"📈 +{percent}%"
-    return f"📉 {percent}%"
+        return f"+{percent}%"
+    return f"{percent}%"
+
+def emoji(value):
+    if value > 0:
+        return "📈"
+    return "📉"
+
+def replace_ticker(ticker):
+    return ticker.replace(".WA", "")
+
 
 def positive_or_negative_value(value):
     if value > 0:
@@ -80,14 +89,14 @@ def load_data_for_post():
     # Nowa cena / srednia cena - 1 * 100 = o ile procent wzroslo
 
     date = datetime.now().strftime("%d.%m.%Y")
-    data_to_post = f"📊 Stan portfela [{date}]:\n"
+    data_to_post = f"📊 Portfel [{date}] 🇵🇱\n\n"
 
     old_value = 0
 
     for ticker in tickers:
 
         old_value += info[ticker]["starting_value"]
-        data_to_post += f"{ticker}: {info[ticker]["volume"]} | {round(info[ticker]["volume"]*current_prices[ticker]["price"], 2)}zł | {positive_or_negative_percent(info[ticker]["return_percentage"])}\n"
+        data_to_post += f"{emoji(info[ticker]["return_percentage"])} ${replace_ticker(ticker)} | {info[ticker]["volume"]}szt. | {round(info[ticker]["volume"]*current_prices[ticker]["price"], 2)}zł | {positive_or_negative_percent(info[ticker]["return_percentage"])}\n"
 
 
 
@@ -97,7 +106,7 @@ def load_data_for_post():
     for ticker in info.keys():
         total_return_sum += info[ticker]["total_return"]
 
-    data_to_post += f"💼 Wartość: {round(wallet_value, 2)}zł | {positive_or_negative_value(round(total_return_sum, 2))}zł | {positive_or_negative_percent(total_return_ptc_sum)}"
+    data_to_post += f"\n💼 Suma: {round(wallet_value, 2)}zł | {positive_or_negative_value(round(total_return_sum, 2))}zł | {positive_or_negative_percent(total_return_ptc_sum)} {emoji(total_return_ptc_sum)}"
 
 
 

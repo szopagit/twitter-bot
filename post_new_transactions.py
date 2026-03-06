@@ -5,8 +5,11 @@ import os
 import libsql
 load_dotenv()
 
+def replace_ticker(ticker):
+    return ticker.replace(".WA", "")
+
 def post_new_transaction():
-    content = "🔔 Nowe tranzakcje:\n"
+    content = "🔔 Nowe tranzakcje:\n\n"
     url = os.getenv("TURSO_DATABASE_URL")
     auth_token = os.getenv("TURSO_AUTH_TOKEN")
 
@@ -34,7 +37,7 @@ def post_new_transaction():
             new_transactions[row[1]]["volume"] += float(row[2])
 
     for ticker, info in new_transactions.items():
-        content += f"{info["type"]} | {ticker} | Ilość: {info["volume"]} szt. | Po cenie: {info["price"]} zł/szt. | Wartość: {round(float(info["volume"])*float(info["price"]), 2)}zł\n"
+        content += f"{info["type"]} | ${replace_ticker(ticker)} | {info["volume"]}szt. | Po cenie: {info["price"]}zł 🏷️ | Wartość: {round(float(info["volume"])*float(info["price"]), 2)}zł 💼\n\n"
 
 
     print(new_transactions)
