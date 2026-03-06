@@ -1,16 +1,15 @@
-# Twitter-bot 
-
-[**Link do bota**](https://x.com/IdiotaZGPW) 
-
----
-
-### Co robi bot?
-Bot codziennie o 17:00 postuje na portalu X aktualny stan mojego portfela IKE z polskimi spółkami. Pobiera dane z bazy danych w chmurze (Turso), do której trafiają one z pliku XLSX eksportowanego z XTB. Szczegóły tego jak dane są zapisywane do bazy w repozytorium [**Portfel Inwestycyjny**](https://github.com/szopagit/Portfel-Inwestycyjny).
+# Twitter-bot
+[**Link to the bot**](https://x.com/IdiotaZGPW)
 
 ---
 
-### Technologie
+### What does the bot do?
+Every weekday at 5:00 PM the bot posts on X the current state of my investment portfolio with Polish stocks. It fetches data from a cloud database (Turso), which gets its data from an XLSX file exported from XTB. Details on how the data is saved to the database can be found in the [**Investment Portfolio**](https://github.com/szopagit/Portfel-Inwestycyjny) repository.
+
+---
+
+### Tech stack
 - Python
-- GitHub Actions (harmonogram Pn-Pt 17:00)
-- Turso (baza danych SQLite w chmurze)
+- GitHub Actions (schedule Mon-Fri 5:00 PM)
+- Turso (SQLite cloud database)
 - X API v2
