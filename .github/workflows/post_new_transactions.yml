@@ -2,7 +2,7 @@ name: Twitter Bot
 
 on:
   schedule:
-    - cron: '0 15 * * 1-5'  # 15:00 czasu polskiego (UTC+2)
+    - cron: '0 15 * * 1-5'  # 17:00 czasu polskiego (UTC+2)
   
 
 jobs:
