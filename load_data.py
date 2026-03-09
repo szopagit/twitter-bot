@@ -33,6 +33,14 @@ def positive_or_negative_value(value):
 def load_data_for_post():
     url = os.getenv("TURSO_DATABASE_URL")
     auth_token = os.getenv("TURSO_AUTH_TOKEN")
+    print("╔════════════════════════════════════════════════════════════╗")
+    print(f" TURSO_DATABASE_URL (dokładnie jak jest): {repr(url)}")
+    print(f" Długość: {len(url)}")
+    print(f" Pierwsze 20 znaków: {repr(url[:20])}")
+    print(f" Ostatnie 10 znaków: {repr(url[-10:])}" if url else "pusty")
+    print(f" Czy kończy się spacją/enterem? {url.endswith((' ', '\n', '\r', '\r\n'))}")
+    print(f" TURSO_AUTH_TOKEN długość: {len(auth_token)} (powinno być 300–500)")
+    print("╚════════════════════════════════════════════════════════════╝")
 
     conn = libsql.connect("walletdb.db", sync_url=url, auth_token=auth_token)
     conn.sync()
